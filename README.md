@@ -9,3 +9,22 @@ Normal
   - Es Werden Beispiel Kategorien vorgeschlagen
 Chaos
   - Es werden aus einem Pool von Kategorien beliebige Kategorien gewähl
+
+Einstellungen: Kategorien, Modus, Zeitlimit, Preis
+
+Spielablauf:
+  - Spiel auf machen
+  - freunden link schicken, einstellungen auswählen los spielen.
+  - Abschicken, bei allen gleichzeitig starten.
+  - Zeitlimit oder erster der abgibt.
+
+  - Nach einer Runde kann  jeweils + der - minus abgegeben werden.
+    (WENN mehr als hälfte +1 ablehnt -> raus )
+  - am ende alle bestätigen und oder spielleiter drückt weiter
+  - Am ende Score Ausgabe und neu in einstellungen.
+
+
+
+ 
+
+checken 0b leute rausfliegen.
