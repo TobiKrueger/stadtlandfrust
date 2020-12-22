@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using stadtlandfrust.Hubs;
 
 namespace stadtlandfrust
 {
@@ -58,6 +59,7 @@ namespace stadtlandfrust
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapHub<StadtLandFrustHub>("/slfhub");
             });
 
             app.UseSpa(spa =>
