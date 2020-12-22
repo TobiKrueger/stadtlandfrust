@@ -2,6 +2,10 @@
 Eine einfache Stadt-Land-Fluss WebAnwendung
 
 
+## Add additional Services 
+-> cd CLientApp -> npm install
+
+## Beschreibung:
 Soll mal zwei Modi haben
 
 Normal
@@ -10,14 +14,13 @@ Normal
 Chaos
   - Es werden aus einem Pool von Kategorien beliebige Kategorien gewähl
 
-Einstellungen: Kategorien, Modus, Zeitlimit, Preis
+Mögliche Spieleinstellungen: Kategorien, Modus, Zeitlimit, Preis
 
 Spielablauf:
   - Spiel auf machen
   - freunden link schicken, einstellungen auswählen los spielen.
   - Abschicken, bei allen gleichzeitig starten.
   - Zeitlimit oder erster der abgibt.
-
   - Nach einer Runde kann  jeweils + der - minus abgegeben werden.
     (WENN mehr als hälfte +1 ablehnt -> raus )
   - am ende alle bestätigen und oder spielleiter drückt weiter
