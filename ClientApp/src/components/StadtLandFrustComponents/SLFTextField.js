@@ -14,6 +14,7 @@ export class SLFTextField extends Component {
 
   handleChange(event) {
     this.setState({ value: event.target.value });
+    this.props.onChange( event.target.value );
   }
 
   render() {

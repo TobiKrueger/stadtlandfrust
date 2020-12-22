@@ -35,6 +35,15 @@ export class GameScreen extends Component {
     this.state = { categories: { Stadt: "A", Land: "B", Frust: "C" } };
   }
 
+  handleChange(textInput, category) {
+    console.log("event", textInput, "Category", category);
+    this.setState((state) => {
+      state.categories[category] = textInput;
+      return state;
+    });
+    console.log("Aktueller status ist:", this.state);
+  }
+
   render() {
     return (
       <div>
@@ -46,6 +55,7 @@ export class GameScreen extends Component {
                 key={category}
                 category={category}
                 value={value}
+                onChange={(textInput) => this.handleChange(textInput, category)}
               ></SLFTextField>
             );
           })}
