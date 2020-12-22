@@ -2,8 +2,19 @@
 Eine einfache Stadt-Land-Fluss WebAnwendung
 
 
+
+## run and develop
+
+```dotnet watch run ```
+
 ## Add additional Services 
--> cd CLientApp -> npm install
+-> cd CLientApp -> ```npm install```
+
+## Add a Site
+add navbar
+add redact component
+add to Addp.js
+add Controller
 
 ## Beschreibung:
 Soll mal zwei Modi haben
