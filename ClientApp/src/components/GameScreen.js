@@ -36,12 +36,10 @@ export class GameScreen extends Component {
   }
 
   handleChange(textInput, category) {
-    console.log("event", textInput, "Category", category);
     this.setState((state) => {
       state.categories[category] = textInput;
       return state;
     });
-    console.log("Aktueller status ist:", this.state);
   }
 
   render() {
