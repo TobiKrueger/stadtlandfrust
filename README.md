@@ -42,3 +42,10 @@ Spielablauf:
  
 
 checken 0b leute rausfliegen.
+
+
+##### Neue Spielidee : most likly:
+
+Jeder stellt am anfang ein paar fragen ein auf die jeder die antwort sein könnte
+anschließend bekommen alle immer eine Frage und können abstimmen wer so sein könnte.
+Danach Punkte :D
