@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import { SLFTextField } from "./StadtLandFrustComponents/SLFTextField";
+import Grid from "@material-ui/core/Grid";
+import { SideScoreBoard } from "./StadtLandFrustComponents/SideScoreBoard";
 
 export class GameScreen extends Component {
   static displayName = GameScreen.name;
@@ -32,7 +34,16 @@ export class GameScreen extends Component {
     //     return console.error(err.toString());
     //   });
 
-    this.state = { categories: { Stadt: "A", Land: "B", Frust: "C" } };
+    this.state = {
+      gameState: {
+        Categories: { Stadt: "A", Land: "B", Frust: "C" },
+        Players: new Map([
+          [{ id: 1, name: "Spieler1" }, 2],
+          [{ id: 2, name: "Spieler2" }, 3],
+          [{ id: 3, name: "Spieler3" }, 4],
+        ]),
+      },
+    };
   }
 
   handleChange(textInput, category) {
@@ -45,19 +56,32 @@ export class GameScreen extends Component {
   render() {
     return (
       <div>
-        <form>
-          {Object.entries(this.state.categories).map(([category, value]) => {
-            console.log(category);
-            return (
-              <SLFTextField
-                key={category}
-                category={category}
-                value={value}
-                onChange={(textInput) => this.handleChange(textInput, category)}
-              ></SLFTextField>
-            );
-          })}
-        </form>
+        <Grid container spacing={3} justify='center'>
+          <Grid item xs={3}>
+            <form>
+              {Object.entries(this.state.gameState.Categories).map(
+                ([category, value]) => {
+                  console.log(category);
+                  return (
+                    <SLFTextField
+                      key={category}
+                      category={category}
+                      value={value}
+                      onChange={(textInput) =>
+                        this.handleChange(textInput, category)
+                      }
+                    ></SLFTextField>
+                  );
+                }
+              )}
+            </form>
+          </Grid>
+          <Grid item xs={3}>
+            <SideScoreBoard
+              players={this.state.gameState.Players}
+            ></SideScoreBoard>
+          </Grid>
+        </Grid>
       </div>
     );
   }
