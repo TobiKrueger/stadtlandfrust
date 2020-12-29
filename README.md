@@ -2,8 +2,19 @@
 Eine einfache Stadt-Land-Fluss WebAnwendung
 
 
+
+## run and develop
+
+```dotnet watch run ```
+
 ## Add additional Services 
--> cd CLientApp -> npm install
+-> cd CLientApp -> ```npm install```
+
+## Add a Site
+add navbar
+add redact component
+add to Addp.js
+add Controller
 
 ## Beschreibung:
 Soll mal zwei Modi haben
@@ -31,3 +42,10 @@ Spielablauf:
  
 
 checken 0b leute rausfliegen.
+
+
+##### Neue Spielidee : most likly:
+
+Jeder stellt am anfang ein paar fragen ein auf die jeder die antwort sein könnte
+anschließend bekommen alle immer eine Frage und können abstimmen wer so sein könnte.
+Danach Punkte :D
