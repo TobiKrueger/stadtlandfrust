@@ -6,36 +6,9 @@ import { SideScoreBoard } from "./StadtLandFrustComponents/SideScoreBoard";
 
 export class GameScreen extends Component {
   static displayName = GameScreen.name;
-
+  
   constructor(props) {
     super(props);
-    var connection = new HubConnectionBuilder().withUrl("/slfhub").build();
-    connection.on("ReceiveMessage", function (user, message) {
-      var msg = message
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-      var encodedMsg = user + " says " + msg;
-      var li = document.createElement("li");
-      li.textContent = encodedMsg;
-      document.getElementById("messagesList").appendChild(li);
-    });
-
-    connection
-      .start()
-      .then(function () {
-        connection
-          .invoke("SendMessage", "Neuer User", "Test Nachricht")
-          .catch(function (err) {
-            return console.error(err.toString());
-          });
-      })
-      .catch(function (err) {
-        return console.error(err.toString());
-      }).then( () =>  {
-        connection.stop();
-      });
-    
 
     this.state = {
       gameState: {
@@ -47,6 +20,41 @@ export class GameScreen extends Component {
         ]),
       },
     };
+    
+    var connection = new HubConnectionBuilder().withUrl("/slfhub").build()
+    connection.on("ReceiveMessage", function (user, message) {
+      var msg = message
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+      var encodedMsg = user + " says " + msg;
+      var li = document.createElement("li");
+      li.textContent = encodedMsg;
+      document.getElementById("messagesList").appendChild(li);
+    });
+    connection.on("onChangeOptions", (gameState)=>{
+      console.log("Halt Die Ferse Lorenz die fällt sonst ab ", gameState);
+    });
+
+    connection
+      .start()
+      .then(async function () {
+        console.log("Trying to invoke send message");
+        console.log(connection.state)
+        console.log(connection)
+        await connection
+          .invoke("SendMessage", "Neuer User", "Test Nachricht")
+          .catch(function (err) {
+            console.log("SCHEI?E ES IST ALLES KACKE")
+            return console.error(err.toString());
+          }).then(()=> console.log("successfully invoked send message", connection.state));
+        await connection.invoke("ChangeCategories", ["A","B", "Z"])
+      })
+      .catch(function (err) {
+        console.log("EROROROROROROROROROROROROR")
+        return console.error(err.toString());
+      })    
+
   }
 
   handleChange(textInput, category) {

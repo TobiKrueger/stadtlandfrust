@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using stadtlandfrust.Hubs;
+using stadtlandfrust.Services;
 
 namespace stadtlandfrust
 {
@@ -32,6 +33,7 @@ namespace stadtlandfrust
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            services.AddSingleton<ISlfGameService, SlfGameService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

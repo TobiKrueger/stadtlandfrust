@@ -6,10 +6,9 @@ namespace stadtlandfrust.Models
     {
         public int Id { get; set; }
         public SlfUsersModel GameAdmin { get; set; }
-        //public List<slfUsersModel> players { get; set; }
 
         //holds players and their corresponding scores
-        public Dictionary<SlfUsersModel, int> Players {get; set;}
+        public List<SlfUsersModel> Players {get; set;}
 
         //Amount of Gamerounds
         public int MaxRounds { get; set; }
