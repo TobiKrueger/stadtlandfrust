@@ -1,6 +1,6 @@
 namespace stadtlandfrust.Models
 {
-    public class slfUsersModel
+    public class SlfUsersModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

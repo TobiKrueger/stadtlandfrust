@@ -2,14 +2,14 @@ using System.Collections.Generic;
 
 namespace stadtlandfrust.Models
 {
-    public class slfGameModel
+    public class SlfGameModel
     {
         public int Id { get; set; }
-        public slfUsersModel GameAdmin { get; set; }
+        public SlfUsersModel GameAdmin { get; set; }
         //public List<slfUsersModel> players { get; set; }
 
         //holds players and their corresponding scores
-        public Dictionary<slfUsersModel, int> Players {get; set;}
+        public Dictionary<SlfUsersModel, int> Players {get; set;}
 
         //Amount of Gamerounds
         public int MaxRounds { get; set; }

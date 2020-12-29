@@ -2,16 +2,16 @@ using System.Collections.Generic;
 
 namespace stadtlandfrust.Models
 {
-    public class slfGameRoundModel
+    public class SlfGameRoundModel
     {
         public int Id { get; set; }
         
-        public slfUsersModel GameAdmin { get; set; }
+        public SlfUsersModel GameAdmin { get; set; }
         //public List<slfUsersModel> players { get; set; }
 
-        public Dictionary<slfUsersModel, int> PlayersScores {get; set;}
+        public Dictionary<SlfUsersModel, int> PlayersScores {get; set;}
 
-        public Dictionary<slfUsersModel, int> PlayersAnwsers {get; set;}
+        public Dictionary<SlfUsersModel, int> PlayersAnwsers {get; set;}
 
         public char CurrentChar { get; set; }
         

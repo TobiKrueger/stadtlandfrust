@@ -9,30 +9,33 @@ export class GameScreen extends Component {
 
   constructor(props) {
     super(props);
-    // var connection = new HubConnectionBuilder().withUrl("/slfhub").build();
-    // connection.on("ReceiveMessage", function (user, message) {
-    //   var msg = message
-    //     .replace(/&/g, "&amp;")
-    //     .replace(/</g, "&lt;")
-    //     .replace(/>/g, "&gt;");
-    //   var encodedMsg = user + " says " + msg;
-    //   var li = document.createElement("li");
-    //   li.textContent = encodedMsg;
-    //   document.getElementById("messagesList").appendChild(li);
-    // });
+    var connection = new HubConnectionBuilder().withUrl("/slfhub").build();
+    connection.on("ReceiveMessage", function (user, message) {
+      var msg = message
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+      var encodedMsg = user + " says " + msg;
+      var li = document.createElement("li");
+      li.textContent = encodedMsg;
+      document.getElementById("messagesList").appendChild(li);
+    });
 
-    // connection
-    //   .start()
-    //   .then(function () {
-    //     connection
-    //       .invoke("SendMessage", "Neuer User", "Test Nachricht")
-    //       .catch(function (err) {
-    //         return console.error(err.toString());
-    //       });
-    //   })
-    //   .catch(function (err) {
-    //     return console.error(err.toString());
-    //   });
+    connection
+      .start()
+      .then(function () {
+        connection
+          .invoke("SendMessage", "Neuer User", "Test Nachricht")
+          .catch(function (err) {
+            return console.error(err.toString());
+          });
+      })
+      .catch(function (err) {
+        return console.error(err.toString());
+      }).then( () =>  {
+        connection.stop();
+      });
+    
 
     this.state = {
       gameState: {
