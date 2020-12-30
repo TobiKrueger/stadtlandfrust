@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { HubConnectionBuilder } from "@microsoft/signalr";
-import { SLFTextField } from "./StadtLandFrustComponents/SLFTextField";
+import { SLFTextField } from "./SLFTextField";
 import Grid from "@material-ui/core/Grid";
-import { SideScoreBoard } from "./StadtLandFrustComponents/SideScoreBoard";
-import { slfCategoryValueModel } from "./StadtLandFrustComponents/models/slfCategoryValueModel";
-import { slfUsersModel} from "./StadtLandFrustComponents/models/slfUsersModel";
+import { SideScoreBoard } from "./SideScoreBoard";
+import { slfCategoryValueModel } from "./models/slfCategoryValueModel";
+import { slfUsersModel} from "./models/slfUsersModel";
 
 
 
