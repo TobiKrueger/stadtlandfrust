@@ -1,26 +1,13 @@
 export class SlfGameModel{
-    constructor() {
-        Id,
-        GameAdmin,
-        
-        //holds players and their corresponding scores
-        Players,
-        
-        //Amount of Gamerounds
-        MaxRounds, 
-        
-        //Current game round
-        CurrentRound,
-        
-        //categires
-        Categories,
-        
-        //gamemode
-        Gamemode,
-        
-        GameTime,
-        
-        //indicates wheater stop round after first player is done
-        UseTime;
+    constructor(Id , GameAdmin,Players, MaxRounds,CurrentRound,CategoryValueMap,Gamemode, GameTime,UseTime) {
+        this.Id = Id;
+        this.GameAdmin = GameAdmin;
+        this.Players = Players;
+        this.MaxRounds = MaxRounds;
+        this.CurrentRound = CurrentRound;
+        this.CategoryValueMap = CategoryValueMap;
+        this.Gamemode = Gamemode;
+        this.GameTime = GameTime;
+        this.UseTime = UseTime;
     }
 }

@@ -12,8 +12,8 @@ export class SideScoreBoard extends Component {
       <ul>
         {this.props.players.map((player) => {
           return (
-            <li key={player.name}>
-              {player.name}: {player.score}
+            <li key={player.Name}>
+              {player.Name}: {player.Score}
             </li>
           );
         })}

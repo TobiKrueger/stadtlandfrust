@@ -3,6 +3,10 @@ import { HubConnectionBuilder } from "@microsoft/signalr";
 import { SLFTextField } from "./StadtLandFrustComponents/SLFTextField";
 import Grid from "@material-ui/core/Grid";
 import { SideScoreBoard } from "./StadtLandFrustComponents/SideScoreBoard";
+import { slfCategoryValueModel } from "./StadtLandFrustComponents/models/slfCategoryValueModel";
+import { slfUsersModel} from "./StadtLandFrustComponents/models/slfUsersModel";
+
+
 
 export class GameScreen extends Component {
   static displayName = GameScreen.name;
@@ -10,32 +14,21 @@ export class GameScreen extends Component {
   constructor(props) {
     super(props);
 
-    
-    
-    var connection = new HubConnectionBuilder().withUrl("/slfhub").build()
-    connection.on("ReceiveMessage", function (user, message) {
-      var msg = message
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-      var encodedMsg = user + " says " + msg;
-      var li = document.createElement("li");
-      li.textContent = encodedMsg;
-      document.getElementById("messagesList").appendChild(li);
-    });
-    connection.on("onChangeOptions", (gameState)=>{
-      console.log("Halt Die Ferse Lorenz die fällt sonst ab ", gameState);
-    });
+    // connection.on("onChangeOptions", (gameState)=>{
+    //   console.log("Halt Die Ferse Lorenz die fällt sonst ab ", gameState);
+    // });
     
     this.state = {
       gameState: {
-        CategoryValueMap: [{Category : "Stadt", Value : "A"},
-          {Category : "Land", Value : "C"},
-          {Category : "Frust", Value : "B"} ],
-        Players:[
-          { id: 1, name: "Spieler1", score: 2 },
-          { id: 2, name: "Spieler2", score: 3},
-          { id: 3, name: "Spieler3", score : 4 },
+        CategoryValueMap: [
+          new slfCategoryValueModel("Stadt","A"),
+          new slfCategoryValueModel("LAnd","v"),
+          new slfCategoryValueModel("Frust","b")
+        ],
+
+        Players:[ new slfUsersModel(1,"Spieler1"),
+                  new slfUsersModel(2,"Spieler2"),
+                  new slfUsersModel(3,"Spieler3"), 
         ],
       },
 
@@ -43,7 +36,6 @@ export class GameScreen extends Component {
     };
 
     this.state.connection.start()
-
   }
 
   sendChangedState(connection, state){
