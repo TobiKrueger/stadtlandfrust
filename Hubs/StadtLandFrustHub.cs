@@ -46,10 +46,12 @@ namespace stadtlandfrust.Hubs
         //when the categories are changed
         public async Task ChangeCategories(string categories)
         {
-             var newCategories = JsonSerializer.Deserialize<Dictionary<string, string>>(categories);
+            Console.WriteLine(categories);
+            var newCategories = JsonSerializer.Deserialize<List<SlfCategoryValueModel>>(categories);
             _gameService.ChangeCategories(newCategories);
             await Clients.All.SendAsync("onChangeCategories", newCategories);
         }
+
 
         // JsonSerializer.Serialize<SlfGameModel>(_gameService.GetGameState())
 

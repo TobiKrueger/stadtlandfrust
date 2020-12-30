@@ -29,7 +29,9 @@ export class GameScreen extends Component {
     
     this.state = {
       gameState: {
-        CategoryValueMap: [{categorie : "Stadt", value : "A"},{categorie : "Land", value : "C"},{categorie : "Frust", value : "B"} ],
+        CategoryValueMap: [{Category : "Stadt", Value : "A"},
+          {Category : "Land", Value : "C"},
+          {Category : "Frust", Value : "B"} ],
         Players:[
           { id: 1, name: "Spieler1", score: 2 },
           { id: 2, name: "Spieler2", score: 3},
@@ -65,11 +67,12 @@ export class GameScreen extends Component {
   // handles the changes local
   handleChange(textInput, category) {
     this.setState((state) => {
-      state.gameState.Categories[category] = textInput;
+      state.gameState.CategoryValueMap.find(element => element.Category === category).Value = textInput;
       return state;
     });
-    console.log(this.state.gameState)
-    //this.sendChangedCategorie(this.state.connection, JSON.stringify(this.state.gameState.Categories));
+    //console.log(this.state.CategoryValueMap)
+    console.log(JSON.stringify(this.state.gameState.CategoryValueMap))
+    this.sendChangedCategorie(this.state.connection, JSON.stringify(this.state.gameState.CategoryValueMap));
   }
 
 
@@ -79,15 +82,15 @@ export class GameScreen extends Component {
         <Grid container spacing={3} justify='center'>
           <Grid item xs={3}>
             <form>
-              {Object.entries(this.state.gameState.Categories).map(
-                ([category, value]) => {
+              {this.state.gameState.CategoryValueMap.map(
+                (categoryValue) => {
                   return (
                     <SLFTextField
-                      key={category}
-                      category={category}
-                      value={value}
+                      key={categoryValue.Category}
+                      category={categoryValue.Category}
+                      value={categoryValue.Value}
                       onChange={(textInput) =>
-                        this.handleChange(textInput, category)
+                        this.handleChange(textInput, categoryValue.Category)
                       }
                     ></SLFTextField>
                   );

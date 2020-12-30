@@ -19,7 +19,7 @@ namespace stadtlandfrust.Models
         //save chars ?
 
         //categires
-        public Dictionary<string,string> Categories { get; set; }
+        public List<SlfCategoryValueModel> CategoryValueMap { get; set; }
 
         //gamemode
         public int Gamemode { get; set; }

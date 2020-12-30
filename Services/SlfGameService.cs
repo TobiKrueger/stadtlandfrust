@@ -21,13 +21,10 @@ namespace stadtlandfrust.Services
 
         }
 
-        public void ChangeCategories(Dictionary<string,string> categories)
+        public void ChangeCategories(List<SlfCategoryValueModel> categories)
         {
-            // this.gameModel.Categories = categories;
-            // foreach (var value in categories.Values)
-            // {
-            //     Console.WriteLine("Value of the Dictionary Item is: {0}", value);
-            // }
+            Console.WriteLine(categories[0].Value);
+            this.gameModel.CategoryValueMap = categories;
         }
 
         public SlfGameModel GetGameState() 

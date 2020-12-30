@@ -7,6 +7,6 @@ namespace stadtlandfrust.Services
     {
         public void changeGameState(SlfGameModel newGameModel);
         public SlfGameModel GetGameState();
-        public void ChangeCategories(Dictionary<string,string> categories);
+        public void ChangeCategories(List<SlfCategoryValueModel> categories);
     }
 }
