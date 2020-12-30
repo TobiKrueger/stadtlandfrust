@@ -10,16 +10,7 @@ export class GameScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      gameState: {
-        Categories: { Stadt: "A", Land: "B", Frust: "C" },
-        Players: new Map([
-          [{ id: 1, name: "Spieler1" }, 2],
-          [{ id: 2, name: "Spieler2" }, 3],
-          [{ id: 3, name: "Spieler3" }, 4],
-        ]),
-      },
-    };
+    
     
     var connection = new HubConnectionBuilder().withUrl("/slfhub").build()
     connection.on("ReceiveMessage", function (user, message) {
@@ -35,34 +26,49 @@ export class GameScreen extends Component {
     connection.on("onChangeOptions", (gameState)=>{
       console.log("Halt Die Ferse Lorenz die fällt sonst ab ", gameState);
     });
+    
+    this.state = {
+      gameState: {
+        Categories: { Stadt: "A", Land: "B", Frust: "C" },
+        Players: new Map([
+          [{ id: 1, name: "Spieler1" }, 2],
+          [{ id: 2, name: "Spieler2" }, 3],
+          [{ id: 3, name: "Spieler3" }, 4],
+        ]),
+      },
 
-    connection
-      .start()
-      .then(async function () {
-        console.log("Trying to invoke send message");
-        console.log(connection.state)
-        console.log(connection)
-        await connection
-          .invoke("SendMessage", "Neuer User", "Test Nachricht")
-          .catch(function (err) {
-            console.log("SCHEI?E ES IST ALLES KACKE")
-            return console.error(err.toString());
-          }).then(()=> console.log("successfully invoked send message", connection.state));
-        await connection.invoke("ChangeCategories", ["A","B", "Z"])
-      })
-      .catch(function (err) {
-        console.log("EROROROROROROROROROROROROR")
-        return console.error(err.toString());
-      })    
+    connection : new HubConnectionBuilder().withUrl("/slfhub").build()
+    };
+
+    this.state.connection.start()
 
   }
 
+  sendChangedState(connection, state){
+    connection.invoke("ChangeOptions", state)
+            .catch(function (err) {
+            console.log("Mistakes were made")
+            return console.error(err.toString())});
+  }
+
+  sendChangedCategorie(connection, categories){
+    connection.invoke("ChangeCategories", categories)
+            .catch(function (err) {
+            console.log("Mistakes were made")
+            return console.error(err.toString())});
+  }
+
+
+  // handles the changes local
   handleChange(textInput, category) {
     this.setState((state) => {
-      state.categories[category] = textInput;
+      state.gameState.Categories[category] = textInput;
       return state;
     });
+    console.log(this.state.gameState)
+    this.sendChangedCategorie(this.state.connection, JSON.stringify(this.state.gameState.Categories));
   }
+
 
   render() {
     return (
@@ -72,7 +78,6 @@ export class GameScreen extends Component {
             <form>
               {Object.entries(this.state.gameState.Categories).map(
                 ([category, value]) => {
-                  console.log(category);
                   return (
                     <SLFTextField
                       key={category}

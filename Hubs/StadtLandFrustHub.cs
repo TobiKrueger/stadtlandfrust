@@ -24,7 +24,6 @@ namespace stadtlandfrust.Hubs
         //When a User joins a game
         public override async Task OnConnectedAsync()
         {
-            Console.WriteLine("Connected new User");
             await Clients.All.SendAsync("New User");
         }
 
@@ -36,19 +35,23 @@ namespace stadtlandfrust.Hubs
         }
 
         //when the options are changed
-        public async Task ChangeOptions(SlfGameModel gameModel){
-            _gameService.changeGameState(gameModel);
-            await Clients.All.SendAsync("onChangeOptions", _gameService.GetGameState());
+        public async Task ChangeOptions(string gameModel)
+        {
+            Console.WriteLine(gameModel);
+            var newGameModel = JsonSerializer.Deserialize<SlfGameModel>(gameModel);
+            _gameService.changeGameState(newGameModel);
+            await Clients.All.SendAsync("onChangeCategories", gameModel);
         }
 
-        public async Task ChangeCategories(List<string> categories){
-            Console.WriteLine("Hello From the Other side");
-            _gameService.ChangeCategories(categories);
-            Console.WriteLine("I Cant say that ive tried");
-            await Clients.All.SendAsync("onChangeOptions", JsonSerializer.Serialize<SlfGameModel>(_gameService.GetGameState()));
-            Console.WriteLine(_gameService.GetGameState());
-            Console.WriteLine(".........................................");
+        //when the categories are changed
+        public async Task ChangeCategories(string categories)
+        {
+             var newCategories = JsonSerializer.Deserialize<Dictionary<string, string>>(categories);
+            _gameService.ChangeCategories(newCategories);
+            await Clients.All.SendAsync("onChangeCategories", newCategories);
         }
+
+        // JsonSerializer.Serialize<SlfGameModel>(_gameService.GetGameState())
 
         //when a new game was started
 
