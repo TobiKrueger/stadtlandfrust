@@ -23,7 +23,7 @@ namespace stadtlandfrust.Services
 
         public void ChangeCategories(Dictionary<string,string> categories)
         {
-            this.gameModel.Categories = categories;
+            // this.gameModel.Categories = categories;
             // foreach (var value in categories.Values)
             // {
             //     Console.WriteLine("Value of the Dictionary Item is: {0}", value);

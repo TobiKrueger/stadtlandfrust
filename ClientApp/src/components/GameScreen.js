@@ -29,12 +29,12 @@ export class GameScreen extends Component {
     
     this.state = {
       gameState: {
-        Categories: { Stadt: "A", Land: "B", Frust: "C" },
-        Players: new Map([
-          [{ id: 1, name: "Spieler1" }, 2],
-          [{ id: 2, name: "Spieler2" }, 3],
-          [{ id: 3, name: "Spieler3" }, 4],
-        ]),
+        CategoryValueMap: [{categorie : "Stadt", value : "A"},{categorie : "Land", value : "C"},{categorie : "Frust", value : "B"} ],
+        Players:[
+          { id: 1, name: "Spieler1", score: 2 },
+          { id: 2, name: "Spieler2", score: 3},
+          { id: 3, name: "Spieler3", score : 4 },
+        ],
       },
 
     connection : new HubConnectionBuilder().withUrl("/slfhub").build()
@@ -58,6 +58,9 @@ export class GameScreen extends Component {
             return console.error(err.toString())});
   }
 
+  stateToJson(){
+
+  }
 
   // handles the changes local
   handleChange(textInput, category) {
@@ -66,7 +69,7 @@ export class GameScreen extends Component {
       return state;
     });
     console.log(this.state.gameState)
-    this.sendChangedCategorie(this.state.connection, JSON.stringify(this.state.gameState.Categories));
+    //this.sendChangedCategorie(this.state.connection, JSON.stringify(this.state.gameState.Categories));
   }
 
 
