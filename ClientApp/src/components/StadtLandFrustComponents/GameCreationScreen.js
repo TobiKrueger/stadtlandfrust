@@ -64,7 +64,8 @@ export class GameCreationScreen extends Component {
 
          // CHECK IF ALREADY CONTAINED ....
          this.setState((state) =>{
-          state.CategoryValueMap.push(new slfCategoryValueModel(this.state.newCategory))
+          state.CategoryValueMap.push(new slfCategoryValueModel(this.state.newCategory));
+          state.newCategory = "";
           return state;
         })
         }
