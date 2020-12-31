@@ -21,6 +21,8 @@ export class GameCreationScreen extends Component {
         this.newCategoryChanged = this.newCategoryChanged.bind(this)
         this.deleteCategory = this.deleteCategory.bind(this)
         this.addCategory = this.addCategory.bind(this)
+        this.handleKeyDown = this.handleKeyDown.bind(this)
+
 
     }
 
@@ -38,6 +40,7 @@ export class GameCreationScreen extends Component {
         this.props.startGame();
     }
 
+    // DELETE
     deleteCategory(categoryValue){
 
       var x =  this.state.CategoryValueMap.filter(category=> category !== categoryValue);
@@ -46,12 +49,25 @@ export class GameCreationScreen extends Component {
 
     }
 
+    //ADD
     addCategory(categoryValue){
 
       console.log(categoryValue)
 
     }
 
+    // ENTER PRESSED ON NEW CATEGORY
+    handleKeyDown(event){
+      if (event.key === 'Enter') {
+
+         // CHECK IF ALREADY CONTAINED ....
+         this.setState((state) =>{
+          state.CategoryValueMap.push(new slfCategoryValueModel(this.state.newCategory))
+          return state;
+        })
+        }
+        
+    }
 
     render() {
         return (
@@ -65,7 +81,8 @@ export class GameCreationScreen extends Component {
                     <InputAdornment position='start'>
                       {this.state.namelabel}: 
                     </InputAdornment>),}}
-                value={this.state.name} onChange={this.nameChanged}/>
+                value={this.state.name} onChange={this.namesChanged}
+                />
 
                 </Grid>
 
@@ -107,7 +124,9 @@ export class GameCreationScreen extends Component {
                     <InputAdornment position='start'>
                       Neue Kategorie: 
                     </InputAdornment>),}}
-                value={this.state.newCategory} onChange={this.newCategoryChanged}/>
+                value={this.state.newCategory} onChange={this.newCategoryChanged}
+                onKeyUp={this.handleKeyDown}
+                />
               </Grid>
 
               <Grid item>
