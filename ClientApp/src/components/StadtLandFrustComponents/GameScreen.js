@@ -22,7 +22,7 @@ export class GameScreen extends Component {
       gameState: {
         CategoryValueMap: [
           new slfCategoryValueModel("Stadt","A"),
-          new slfCategoryValueModel("LAnd","v"),
+          new slfCategoryValueModel("Land","v"),
           new slfCategoryValueModel("Frust","b")
         ],
 

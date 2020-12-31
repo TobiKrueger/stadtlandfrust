@@ -28,6 +28,10 @@ export class GameCreationScreen extends Component {
 
       }
 
+      onConnect(){
+
+      }
+
     // Tracks name box
     nameChanged(event){
         this.setState({ name: event.target.value });
@@ -167,9 +171,8 @@ export class GameCreationScreen extends Component {
       Join the fun :) 
       </Button>
       </Grid>
-          
-
-        <Grid item>
+      
+       <Grid item>
           Players:
 
         {this.state.Players.map(
@@ -181,16 +184,9 @@ export class GameCreationScreen extends Component {
           );
         }
     )}
-
         </Grid>
-
-      
-        
     </Grid>)
-
     }
-
-
   }
 
     render() {

@@ -3,5 +3,4 @@ export class slfCategoryValueModel{
         this.Category = Category
         this.Value = Value
     }
-
 }
