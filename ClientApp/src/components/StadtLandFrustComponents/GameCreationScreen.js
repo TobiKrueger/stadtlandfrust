@@ -23,15 +23,17 @@ export class GameCreationScreen extends Component {
         this.newCategoryChanged = this.newCategoryChanged.bind(this)
         this.deleteCategory = this.deleteCategory.bind(this)
         this.addCategory = this.addCategory.bind(this)
-        this.handleKeyDown = this.handleKeyDown.bind(this)
+        this.handleKeyDownNewCategory = this.handleKeyDownNewCategory.bind(this)
 
 
     }
 
+    // Tracks name box
     nameChanged(event){
         this.setState({ name: event.target.value });
     }
 
+    //tracks category box 
     newCategoryChanged(event){
       this.setState({ newCategory: event.target.value });
   }    
@@ -40,36 +42,46 @@ export class GameCreationScreen extends Component {
     enterGame(){
         //send name
         this.props.startGame();
+
     }
 
-    // DELETE
+    // DELETES a Category, Implement send here!
     deleteCategory(categoryValue){
 
       var x =  this.state.CategoryValueMap.filter(category=> category !== categoryValue);
+
+      if (x.length !== 0){
       this.setState({ CategoryValueMap: x });
-      console.log(categoryValue)
-
+      //TODO
+      }
+      else{
+        alert("You need atleast one Category")
+      }
     }
 
-    //ADD
-    addCategory(categoryValue){
-
-      console.log(categoryValue)
-
-    }
-
-    // ENTER PRESSED ON NEW CATEGORY
-    handleKeyDown(event){
-      if (event.key === 'Enter') {
-
-         // CHECK IF ALREADY CONTAINED ....
-         this.setState((state) =>{
+    //ADDS a new Category, Implement SEND HERE!
+    addCategory(newCategory){
+      var x = this.state.CategoryValueMap.filter(category=> category.Category === newCategory)
+    
+      if (x.length === 0){
+        this.setState((state) =>{
           state.CategoryValueMap.push(new slfCategoryValueModel(this.state.newCategory));
           state.newCategory = "";
           return state;
         })
-        }
-        
+
+        //TODO
+      }
+      else {
+        alert("Idiot!!1! that Category is already there!")
+      }
+    }
+
+    // ENTER PRESSED ON NEW CATEGORY
+    handleKeyDownNewCategory(event){
+      if (event.key === 'Enter') {
+        this.addCategory(this.state.newCategory)
+      }
     }
 
     render() {
@@ -138,7 +150,7 @@ export class GameCreationScreen extends Component {
                       Neue Kategorie: 
                     </InputAdornment>),}}
                 value={this.state.newCategory} onChange={this.newCategoryChanged}
-                onKeyUp={this.handleKeyDown}
+                onKeyUp={this.handleKeyDownNewCategory}
                 />
               </Grid>
 
@@ -151,7 +163,7 @@ export class GameCreationScreen extends Component {
 
             </Grid>
             
-            {/* rechtes Grid */}
+            {/* Rechtes Grid */}
             <Grid item xs={3}>
              Einstellungen:
 
