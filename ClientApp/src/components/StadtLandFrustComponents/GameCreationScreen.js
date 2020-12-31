@@ -102,7 +102,7 @@ export class GameCreationScreen extends Component {
                 {this.state.players.map(
                 user => {
                   return (
-                  <Button key={user.ID} variant="outlined" color="primary">
+                  <Button key={user.Id} variant="outlined" color="primary">
                     {user.Name}
                     </Button>
                   );
