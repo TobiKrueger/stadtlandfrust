@@ -96,6 +96,9 @@ export class GameScreen extends Component {
             ></SideScoreBoard>
           </Grid>
         </Grid>
+        <Grid container spacing={3} justify='center'>
+          enter button
+        </Grid>
       </div>
     );
   }
