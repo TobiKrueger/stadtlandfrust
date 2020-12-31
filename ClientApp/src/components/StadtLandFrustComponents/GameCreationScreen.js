@@ -12,21 +12,21 @@ export class GameCreationScreen extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {name:"X", namelabel : "Name", newCategory : "",
+        this.state = {name:"", namelabel : "Name", newCategory : "",joined:false,
         CategoryValueMap : [new slfCategoryValueModel("x"),
             new slfCategoryValueModel("y")],
-          players : [ new slfUsersModel("1","player1")]
+          Players : []
         }
 
         this.enterGame = this.enterGame.bind(this)
+        this.rigthPanel = this.rigthPanel.bind(this)
         this.nameChanged = this.nameChanged.bind(this)
         this.newCategoryChanged = this.newCategoryChanged.bind(this)
         this.deleteCategory = this.deleteCategory.bind(this)
         this.addCategory = this.addCategory.bind(this)
         this.handleKeyDownNewCategory = this.handleKeyDownNewCategory.bind(this)
 
-
-    }
+      }
 
     // Tracks name box
     nameChanged(event){
@@ -37,13 +37,6 @@ export class GameCreationScreen extends Component {
     newCategoryChanged(event){
       this.setState({ newCategory: event.target.value });
   }    
-
-
-    enterGame(){
-        //send name
-        this.props.startGame();
-
-    }
 
     // DELETES a Category, Implement send here!
     deleteCategory(categoryValue){
@@ -65,7 +58,7 @@ export class GameCreationScreen extends Component {
     
       if (x.length === 0){
         this.setState((state) =>{
-          state.CategoryValueMap.push(new slfCategoryValueModel(this.state.newCategory));
+          state.CategoryValueMap.push(new slfCategoryValueModel(newCategory));
           state.newCategory = "";
           return state;
         })
@@ -77,6 +70,8 @@ export class GameCreationScreen extends Component {
       }
     }
 
+    
+
     // ENTER PRESSED ON NEW CATEGORY
     handleKeyDownNewCategory(event){
       if (event.key === 'Enter') {
@@ -84,49 +79,125 @@ export class GameCreationScreen extends Component {
       }
     }
 
+    enterGame(){
+      //send name
+      
+      this.addPlayer(this.state.name)
+      
+      //if(host){
+        //this.props.startGame();
+      //}
+      
+
+  }
+
+  // ADDS A NEW PLAYER, Add send here!
+  addPlayer(Name){
+
+    if(Name === ""){
+      alert("You need to enter a Name")
+      return
+    }
+
+    if(!this.state.joined){
+      var x = this.state.Players.filter(player=> player.Name === Name)
+      if(x.length === 0){
+
+        this.setState((state) =>{
+          state.Players.push(new slfUsersModel("2",Name));
+          state.newCategory = "";
+          return state;
+        })
+        this.setState({joined : true})
+
+      }
+      else{
+        alert("Name already taken")
+      }
+      
+
+      //TODO
+      // if Host : send to server starting
+    }
+  }
+
+  checkIfHost(){
+
+  }
+
+  rigthPanel(){
+
+    if(this.state.joined){
+      return(<Grid item xs={3}>
+        <Grid item>
+                  Joined as {this.state.name}
+        </Grid>
+
+        <Grid item>
+          Players:
+
+        {this.state.Players.map(
+        user => {
+          return (
+          <Button key={user.Id} variant="outlined" color="primary">
+            {user.Name}
+            </Button>
+          );
+        }
+    )}
+      </Grid>
+      </Grid>)
+    }
+    else{
+
+      return(<Grid item xs={3}>
+
+        <Grid item>
+        <TextField 
+        InputProps={{ startAdornment: (
+            <InputAdornment position='start'>
+              {this.state.namelabel}: 
+            </InputAdornment>),}}
+        value={this.state.name} onChange={this.nameChanged}
+        />
+        </Grid>
+
+        <Grid item>
+      <Button variant="outlined" color="primary" onClick={this.enterGame}>
+      Join the fun :) 
+      </Button>
+      </Grid>
+          
+
+        <Grid item>
+          Players:
+
+        {this.state.Players.map(
+        user => {
+          return (
+          <Button key={user.Id} variant="outlined" color="primary">
+            {user.Name}
+            </Button>
+          );
+        }
+    )}
+
+        </Grid>
+
+      
+        
+    </Grid>)
+
+    }
+
+
+  }
+
     render() {
         return (
           <div>
             <Grid container spacing={3} justify='center'>
-              <Grid item xs={3}>
-
-                <Grid item>
-                <TextField 
-                InputProps={{ startAdornment: (
-                    <InputAdornment position='start'>
-                      {this.state.namelabel}: 
-                    </InputAdornment>),}}
-                value={this.state.name} onChange={this.namesChanged}
-                />
-
-                </Grid>
-
-                <Grid item>
-
-                <Button variant="outlined" color="primary" onClick={this.enterGame}>
-                Join the fun :) 
-                </Button>
-                  
-                </Grid>
-
-                <Grid item>
-                  Players:
-
-                {this.state.players.map(
-                user => {
-                  return (
-                  <Button key={user.Id} variant="outlined" color="primary">
-                    {user.Name}
-                    </Button>
-                  );
-                }
-            )}
-
-                </Grid>
-
-              
-                
-            </Grid>
+            {this.rigthPanel()}
             
             {/* MITTELERES GRID */}
             <Grid item >
