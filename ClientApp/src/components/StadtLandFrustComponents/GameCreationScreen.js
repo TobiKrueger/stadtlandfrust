@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { slfCategoryValueModel } from "./models/slfCategoryValueModel";
 import { Grid } from "@material-ui/core";
+import { slfCategoryValueModel } from "./models/slfCategoryValueModel";
+import { slfUsersModel} from "./models/slfUsersModel";
 
 
 export class GameCreationScreen extends Component {
@@ -13,7 +14,8 @@ export class GameCreationScreen extends Component {
         super(props);
         this.state = {name:"X", namelabel : "Name", newCategory : "",
         CategoryValueMap : [new slfCategoryValueModel("x"),
-            new slfCategoryValueModel("y")]
+            new slfCategoryValueModel("y")],
+          players : [ new slfUsersModel("1","player1")]
         }
 
         this.enterGame = this.enterGame.bind(this)
@@ -89,13 +91,23 @@ export class GameCreationScreen extends Component {
                 <Grid item>
 
                 <Button variant="outlined" color="primary" onClick={this.enterGame}>
-                Enter the fun :) 
+                Join the fun :) 
                 </Button>
                   
                 </Grid>
 
                 <Grid item>
-                joined players
+                  Players:
+
+                {this.state.players.map(
+                user => {
+                  return (
+                  <Button key={user.ID} variant="outlined" color="primary">
+                    {user.Name}
+                    </Button>
+                  );
+                }
+            )}
 
                 </Grid>
 
@@ -104,7 +116,7 @@ export class GameCreationScreen extends Component {
             </Grid>
             
             {/* MITTELERES GRID */}
-            <Grid item xs={3}>
+            <Grid item >
 
               <Grid item>
               {this.state.CategoryValueMap.map(
