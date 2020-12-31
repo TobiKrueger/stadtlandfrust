@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { ConsoleLogger } from "@microsoft/signalr/dist/esm/Utils";
+import InputAdornment from '@material-ui/core/InputAdornment';
+import { slfCategoryValueModel } from "./models/slfCategoryValueModel";
+import { Grid } from "@material-ui/core";
 
 
 export class GameCreationScreen extends Component {
@@ -9,32 +11,126 @@ export class GameCreationScreen extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {name:"X"}
+        this.state = {name:"X", namelabel : "Name", newCategory : "",
+        CategoryValueMap : [new slfCategoryValueModel("x"),
+            new slfCategoryValueModel("y")]
+        }
 
         this.enterGame = this.enterGame.bind(this)
         this.nameChanged = this.nameChanged.bind(this)
+        this.newCategoryChanged = this.newCategoryChanged.bind(this)
+        this.deleteCategory = this.deleteCategory.bind(this)
+        this.addCategory = this.addCategory.bind(this)
+
     }
 
     nameChanged(event){
-        console.log(event.target.value)
         this.setState({ name: event.target.value });
     }
+
+    newCategoryChanged(event){
+      this.setState({ newCategory: event.target.value });
+  }    
+
 
     enterGame(){
         //send name
         this.props.startGame();
     }
 
+    deleteCategory(categoryValue){
+
+      var x =  this.state.CategoryValueMap.filter(category=> category !== categoryValue);
+      this.setState({ CategoryValueMap: x });
+      console.log(categoryValue)
+
+    }
+
+    addCategory(categoryValue){
+
+      console.log(categoryValue)
+
+    }
+
 
     render() {
         return (
           <div>
-           <TextField
-          value={this.state.name} onChange={this.nameChanged}
-        />
-        <Button variant="outlined" color="primary" onClick={this.enterGame}>
-        Enter the fun :) 
-        </Button>
+            <Grid container spacing={3} justify='center'>
+              <Grid item xs={3}>
+
+                <Grid item>
+                <TextField 
+                InputProps={{ startAdornment: (
+                    <InputAdornment position='start'>
+                      {this.state.namelabel}: 
+                    </InputAdornment>),}}
+                value={this.state.name} onChange={this.nameChanged}/>
+
+                </Grid>
+
+                <Grid item>
+
+                <Button variant="outlined" color="primary" onClick={this.enterGame}>
+                Enter the fun :) 
+                </Button>
+                  
+                </Grid>
+
+                <Grid item>
+                joined players
+
+                </Grid>
+
+              
+                
+            </Grid>
+            
+            {/* MITTELERES GRID */}
+            <Grid item xs={3}>
+
+              <Grid item>
+              {this.state.CategoryValueMap.map(
+                categoryValue => {
+                  return (
+                  <Button key={categoryValue.Category} variant="outlined" color="primary" onClick={() => this.deleteCategory(categoryValue)}>
+                    {categoryValue.Category}
+                    </Button>
+                  );
+                }
+            )}              
+            </Grid>
+
+              <Grid item >
+              <TextField 
+                InputProps={{ startAdornment: (
+                    <InputAdornment position='start'>
+                      Neue Kategorie: 
+                    </InputAdornment>),}}
+                value={this.state.newCategory} onChange={this.newCategoryChanged}/>
+              </Grid>
+
+              <Grid item>
+                  Standart categorys
+              </Grid>
+
+            
+              
+
+            </Grid>
+            
+            {/* rechtes Grid */}
+            <Grid item xs={3}>
+             Einstellungen:
+
+             <Grid item>
+               Beispiel einstellung
+             </Grid>
+
+            </Grid>
+
+          </Grid>
+        
         </div>
         );
     }

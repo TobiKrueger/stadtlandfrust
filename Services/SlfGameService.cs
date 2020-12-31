@@ -23,7 +23,7 @@ namespace stadtlandfrust.Services
 
         public void ChangeCategories(List<SlfCategoryValueModel> categories)
         {
-            Console.WriteLine(categories[0].Value);
+            //Console.WriteLine(categories[0].Value);
             this.gameModel.CategoryValueMap = categories;
         }
 
