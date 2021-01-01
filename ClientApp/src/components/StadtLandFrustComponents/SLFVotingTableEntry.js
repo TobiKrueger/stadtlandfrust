@@ -1,11 +1,16 @@
 import React, { Component } from "react";
-import TextField from "@material-ui/core/TextField";
-import List from '@material-ui/core/List';
-import { Button, Grid, ListItemSecondaryAction } from '@material-ui/core'
-import ListItem from '@material-ui/core/ListItem';
+import { Button } from '@material-ui/core'
 import { slfUsersModel} from "./models/slfUsersModel";
 import { slfCategoryAnswers} from "./models/slfCategoryAnswers";
 import { slfUserAnswer} from "./models/slfUserAnswer";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
 
 
 export class SLFVotingTableEntry extends Component {
@@ -13,34 +18,54 @@ export class SLFVotingTableEntry extends Component {
 
 constructor(props) {
         super(props);
-        this.state = { category: "y", anwsermap: [new slfUserAnswer(new slfUsersModel("2","3"),"hello"),
-        new slfUserAnswer(new slfUsersModel("4","4"),"there")]}
+        this.state =  { Anwsermap : this.props.Anwsermap}
+        this.buildTableRow = this.buildTableRow.bind(this)
+    }
 
+    buildTableRow(){
+
+        return(
+            this.state.Anwsermap.UserAnswers.map(
+                answer => {
+
+                    return(
+                    <TableRow key={answer.User.Name + answer.Answer}> 
+                        <TableCell>{answer.User.Name}</TableCell>
+                        <TableCell>{answer.Answer}</TableCell>
+       
+                        <TableCell> <Button>XX</Button> </TableCell>
+                        <TableCell>Bonus</TableCell>
+                    </TableRow>)
+                }
+            )
+        )
     }
 
     render() {
 
         return(
-            <Grid container>
-                    {this.state.category}
-                    <Grid container justify='center'>
-                        <Grid item xs={3}>
-                            anwser
-                        </Grid>
-                        <Grid xs={3}>
-                        <Button >
-                           XXX
-                        </Button>
-                        </Grid>
-                        <Grid >
-                        <Button>
-                            YYY
-                        </Button>
-                        </Grid>
-                    </Grid>
-                        
-            </Grid>
-         
+            
+            <TableContainer component={Paper}>
+                <Table >
+                 
+            
+                 <TableHead> 
+                 <TableRow> 
+                 <TableCell colSpan={4}>{this.state.Anwsermap.Category}</TableCell>
+                 </TableRow>
+     
+                 </TableHead>
+     
+                 <TableBody>
+
+                 {this.buildTableRow()}
+     
+     
+                 </TableBody>
+                 </Table>
+            </TableContainer>
+            
+
         )
     }
 
