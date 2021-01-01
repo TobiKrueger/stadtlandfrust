@@ -51,7 +51,11 @@ export class VotingBoard extends Component {
         return(
 
             <div>
-                    {this.buildTable()}        
+
+                    {this.buildTable()}
+                
+
+                    
             </div>
         )
 
