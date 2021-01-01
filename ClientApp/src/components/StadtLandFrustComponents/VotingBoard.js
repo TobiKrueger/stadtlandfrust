@@ -6,6 +6,11 @@ import { Grid } from "@material-ui/core";
 import { slfCategoryValueModel } from "./models/slfCategoryValueModel";
 import { slfUsersModel} from "./models/slfUsersModel";
 import { slfCategoryAnswers} from "./models/slfCategoryAnswers";
+import { slfUserAnswer} from "./models/slfUserAnswer";
+import { SLFVotingTableEntry } from "./SLFVotingTableEntry";
+
+
+
 
 export class VotingBoard extends Component {
     static displayName = VotingBoard.name;
@@ -13,14 +18,36 @@ export class VotingBoard extends Component {
     constructor(props) {
         super(props);
         this.state = {name:"", namelabel : "Name",
-        CategoryAnswers: new slfCategoryAnswers("y", [(new slfUsersModel("1","x"), "hello"),new slfUsersModel("2","3"), "there"]),
-        CategoryValueMap : [new slfCategoryValueModel("x"),
-            new slfCategoryValueModel("y")],
+        CategoryAnswers: [new slfCategoryAnswers("y", [new slfUserAnswer(new slfUsersModel("2","3"),"hello"),
+                                                        new slfUserAnswer(new slfUsersModel("4","4"),"there")]),
+                                                        new slfCategoryAnswers("X", [new slfUserAnswer(new slfUsersModel("2","3"),"General"),
+                                                        new slfUserAnswer(new slfUsersModel("4","4"),"Kenobi")])
+                                                    ],
           Players : []
         }
 
+        this.displayCategroy = this.displayCategroy.bind(this)
+      }
+
+      displayCategroy(){
+
+        console.log(this.state.CategoryAnswers)
+        return this.state.CategoryAnswers.map(
+                anwsers => {
+                  return (
+                      anwsers.UserAnswers.map(solution => {
+                       return( 
+                       <Button variant="outlined" color="primary" >
+                        {solution.User.Name} {solution.Anwser} 
+                        </Button>)
+                      })
+                    
+    
+                  )
+                }
+            )
         
-        //Bind stuff here
+
       }
 
     render() {
@@ -29,17 +56,16 @@ export class VotingBoard extends Component {
 
             <div>
                 <Grid container spacing={3} justify='center'>
-                {this.state.CategoryAnswers.map(
-                anwsers => {
-                  return (
-                  <Button key={categoryValue.Category} variant="outlined" color="primary" onClick={() => this.deleteCategory(categoryValue)}>
-                    {categoryValue.Category}
-                    </Button>
-                  );
-                }
-            )}
+                
+
+                    <SLFVotingTableEntry>
+
+                    </SLFVotingTableEntry>
+                    {/* <Grid container spacing={3} justify='center'>
+                        {this.displayCategroy()}
+                
+                    </Grid> */}
                 </Grid>
-            
             </div>
         )
 
