@@ -13,7 +13,7 @@ export class VotingBoard extends Component {
     constructor(props) {
         super(props);
         this.state = {name:"", namelabel : "Name",
-        CategoryAnswers: [new slfCategoryAnswers("Y", [new slfUserAnswer(new slfUsersModel("2","3"),"hello"),
+        CategoryAnswers: [new slfCategoryAnswers("Y", [new slfUserAnswer(new slfUsersModel("2","3"),"hello",5,6),
                                                         new slfUserAnswer(new slfUsersModel("4","4"),"there")]),
                                                         new slfCategoryAnswers("X", [new slfUserAnswer(new slfUsersModel("2","3"),"General"),
                                                         new slfUserAnswer(new slfUsersModel("4","5"),"Kenobi")])

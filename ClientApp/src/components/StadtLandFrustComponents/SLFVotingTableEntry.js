@@ -22,19 +22,24 @@ constructor(props) {
         this.buildTableRow = this.buildTableRow.bind(this)
     }
 
+    //TODO HANDLE CHANGES
+    // TODO SEND TO SERVER
+    // ADD DONE BUTTON
+    //
+
     buildTableRow(){
 
         return(
             this.state.Anwsermap.UserAnswers.map(
+                
                 answer => {
-
                     return(
                     <TableRow key={answer.User.Name + answer.Answer}> 
                         <TableCell>{answer.User.Name}</TableCell>
                         <TableCell>{answer.Answer}</TableCell>
        
-                        <TableCell> <Button>XX</Button> </TableCell>
-                        <TableCell>Bonus</TableCell>
+                    <TableCell> <Button>{String(answer.KickVotes)}</Button> </TableCell>
+                    <TableCell><Button>{String(answer.BonusVotes)}</Button></TableCell>
                     </TableRow>)
                 }
             )
