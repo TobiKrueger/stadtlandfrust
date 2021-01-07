@@ -11,7 +11,7 @@ namespace stadtlandfrust.Services
 
         public SlfGameService()
         {
-
+            //gameModel.CategoryValueMap.Add(new SlfCategoryValueModel("Stadt", ""));
         }
 
         public void startNextRound()
