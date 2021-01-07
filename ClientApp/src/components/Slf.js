@@ -28,7 +28,7 @@ export class Slf extends Component {
 
         return (
                 <div>
-                    <GameCreationScreen startGame ={this.startGame} >
+                    <GameCreationScreen startGame ={this.startGame} connection={this.state.connection}>
   
                     </GameCreationScreen >
                 </div>)

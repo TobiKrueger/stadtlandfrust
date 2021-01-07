@@ -48,8 +48,8 @@ export class GameScreen extends Component {
             return console.error(err.toString())});
   }
 
-  sendChangedCategorie(connection, categories){
-    connection.invoke("ChangeCategories", categories)
+  sendChangedCategorieAnswer(connection, categories){
+    connection.invoke("ChangeCategorieAnswer", categories)
             .catch(function (err) {
             console.log("Mistakes were made")
             return console.error(err.toString())});
@@ -69,7 +69,7 @@ export class GameScreen extends Component {
       x = state.gameState.CategoryValueMap
       console.log(x)
       console.log(JSON.stringify(x));
-      this.sendChangedCategorie(this.props.connection, JSON.stringify(x));
+      this.sendChangedCategorieAnswer(this.props.connection, JSON.stringify(x));
 
       return state
     });

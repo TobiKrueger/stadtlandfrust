@@ -50,7 +50,7 @@ namespace stadtlandfrust.Hubs
         }
 
         //when the categories are changed
-        public async Task ChangeCategories(string categories)
+        public async Task ChangeCategorieAnswer(string categories)
         {
             Console.WriteLine(categories);
             var newCategories = JsonSerializer.Deserialize<List<SlfCategoryValueModel>>(categories);
@@ -65,6 +65,20 @@ namespace stadtlandfrust.Hubs
             SlfUsersModel newUser = JsonSerializer.Deserialize<SlfUsersModel>(user);
             _gameService.AddUser(newUser);
             await Clients.Others.SendAsync("newUserJoined",user);
+        }
+
+        public async Task AddCategory(string categorie)
+        {
+            Console.WriteLine(categorie);
+            SlfCategoryValueModel newCategory =  JsonSerializer.Deserialize<SlfCategoryValueModel>(categorie);
+            _gameService.AddCategory(newCategory);
+            await UpdateClients();
+        }
+        
+        public async Task UpdateClients()
+        {
+            SlfGameModel gameState = _gameService.GetGameState();
+            await Clients.Others.SendAsync("changeGameState",gameState);
         }
 
         // JsonSerializer.Serialize<SlfGameModel>(_gameService.GetGameState())

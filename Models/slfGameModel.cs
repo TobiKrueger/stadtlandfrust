@@ -8,7 +8,7 @@ namespace stadtlandfrust.Models
         public SlfUsersModel GameAdmin { get; set; }
 
         //holds players and their corresponding scores
-        public List<SlfUsersModel> Players {get; set;}
+        public List<SlfUsersModel> Players { get; set; } = new List<SlfUsersModel>();
 
         //Amount of Gamerounds
         public int MaxRounds { get; set; }
@@ -19,7 +19,7 @@ namespace stadtlandfrust.Models
         //save chars ?
 
         //categires
-        public List<SlfCategoryValueModel> CategoryValueMap { get; set; }
+        public List<SlfCategoryValueModel> CategoryValueMap { get; set; } = new List<SlfCategoryValueModel>();
 
         //gamemode
         public int Gamemode { get; set; }

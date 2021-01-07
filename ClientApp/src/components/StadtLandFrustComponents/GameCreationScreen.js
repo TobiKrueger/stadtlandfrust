@@ -27,6 +27,15 @@ export class GameCreationScreen extends Component {
         this.addCategory = this.addCategory.bind(this)
         this.handleKeyDownNewCategory = this.handleKeyDownNewCategory.bind(this)
         this.startGame = this.startButton.bind(this)
+        this.sendNewCategory = this.sendNewCategory.bind(this)
+      }
+
+      sendNewCategory(newCategory){       
+      console.log(newCategory)
+      this.props.connection.invoke("AddCategory", newCategory)
+            .catch(function (err) {
+            console.log("Mistakes were made")
+            return console.error(err.toString())});
 
       }
 
@@ -66,10 +75,12 @@ export class GameCreationScreen extends Component {
         this.setState((state) =>{
           state.CategoryValueMap.push(new slfCategoryValueModel(newCategory));
           state.newCategory = "";
+
+          this.sendNewCategory(JSON.stringify(new slfCategoryValueModel(newCategory)))
           return state;
         })
 
-        //TODO
+        //TODO SEND HERE
       }
       else {
         alert("Idiot!!1! that Category is already there!")

@@ -10,5 +10,7 @@ namespace stadtlandfrust.Services
         public void ChangeCategories(List<SlfCategoryValueModel> categories);
 
         public void AddUser(SlfUsersModel newUser);
+
+        public void AddCategory(SlfCategoryValueModel category);
     }
 }

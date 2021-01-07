@@ -48,6 +48,21 @@ namespace stadtlandfrust.Services
             //Console.WriteLine(categories[0].Value);
             this.gameModel.CategoryValueMap = categories;
         }
+        public void AddCategory(SlfCategoryValueModel category)
+        {
+        
+            Console.WriteLine(category);
+            List<SlfCategoryValueModel> newCatmap = this.gameModel.CategoryValueMap;
+            newCatmap.Add(category);
+            this.gameModel.CategoryValueMap = newCatmap;
+        }
+
+        public void DeleteCategory(SlfCategoryValueModel removed)
+        {
+            List<SlfCategoryValueModel> newCatmap = this.gameModel.CategoryValueMap;
+            newCatmap.Remove(removed);
+            this.gameModel.CategoryValueMap = newCatmap;
+        }
 
         public SlfGameModel GetGameState() 
         {
