@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import { Button } from '@material-ui/core'
-import { slfUsersModel} from "./models/slfUsersModel";
-import { slfCategoryAnswers} from "./models/slfCategoryAnswers";
-import { slfUserAnswer} from "./models/slfUserAnswer";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -20,12 +17,24 @@ constructor(props) {
         super(props);
         this.state =  { Anwsermap : this.props.Anwsermap}
         this.buildTableRow = this.buildTableRow.bind(this)
+
+        this.addkickVote = this.addkickVote.bind(this)
+        this.addBonusVote = this.addBonusVote.bind(this)
     }
 
     //TODO HANDLE CHANGES
     // TODO SEND TO SERVER
     // ADD DONE BUTTON
     //
+
+
+    addkickVote(answer,answermap,event){
+        this.props.addkickVote(answer,answermap,event)
+    }
+
+    addBonusVote(answer,answermap,event){
+        this.props.addBonusVote(answer,answermap,event)
+    }
 
     buildTableRow(){
 
@@ -38,8 +47,8 @@ constructor(props) {
                         <TableCell>{answer.User.Name}</TableCell>
                         <TableCell>{answer.Answer}</TableCell>
        
-                    <TableCell> <Button>{String(answer.KickVotes)}</Button> </TableCell>
-                    <TableCell><Button>{String(answer.BonusVotes)}</Button></TableCell>
+                    <TableCell> <Button onClick={e => this.addkickVote(answer,this.state.Anwsermap,e)}>{String(answer.KickVotes)}</Button> </TableCell>
+                    <TableCell> <Button onClick={e => this.addBonusVote(answer,this.state.Anwsermap,e)}>{String(answer.BonusVotes)}</Button></TableCell>
                     </TableRow>)
                 }
             )

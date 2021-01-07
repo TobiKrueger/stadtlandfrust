@@ -18,33 +18,63 @@ export class VotingBoard extends Component {
                                                         new slfCategoryAnswers("X", [new slfUserAnswer(new slfUsersModel("2","3"),"General"),
                                                         new slfUserAnswer(new slfUsersModel("4","5"),"Kenobi")])
                                                     ],
-          Players : []
+          Players : [],
+          KickVoted : [],
+          BonusVoted: [],
+
         }
         this.buildTable = this.buildTable.bind(this)
+        this.addBonusVote = this.addBonusVote.bind(this)
+        this.addkickVote = this.addkickVote.bind(this)
+        this.changeBonusState = this.changeBonusState.bind(this)
+      }
+
+      // refactor hard
+      addBonusVote(answer,answermap,event){
+        this.setState((state) => {
+          //console.log(state.CategoryAnswers.find(element => element.UserAnswers === answer))
+          state.CategoryAnswers.find(element => element === answermap).UserAnswers.find(ans => ans === answer).BonusVotes += 1;
+          return state;
+        });
+        this.changeBonusState(answer)
+      }
+
+      changeBonusState(BonusAnswer){
+        this.setState(state=>{
+          state.BonusVoted.push(BonusAnswer)
+          return state;
+
+        })
+
+        console.log(this.state.BonusVoted)
+      }
+
+
+      addkickVote(answer,answermap,event){
+        this.setState((state) => {
+          state.CategoryAnswers.find(element => element === answermap).UserAnswers.find(ans => ans === answer).KickVotes += 1;
+          return state;
+        });
       }
         
 
 
       buildTable(){
 
-        console.log(this.state.CategoryAnswers)
+        //console.log(this.state.CategoryAnswers)
           return(
             this.state.CategoryAnswers.map(
             catAnwsers =>{
                 return( 
 
-                        <SLFVotingTableEntry key={catAnwsers.Category} Anwsermap={catAnwsers}>
+                        <SLFVotingTableEntry key={catAnwsers.Category} Anwsermap={catAnwsers} addBonusVote={this.addBonusVote} addkickVote={this.addkickVote}>
 
                         </SLFVotingTableEntry>
-
                 )
             }
-            
-
-        ))
-        
-
+        )) 
       }
+
 
     render() {
 
@@ -53,9 +83,7 @@ export class VotingBoard extends Component {
             <div>
 
                     {this.buildTable()}
-                
-
-                    
+         
             </div>
         )
 

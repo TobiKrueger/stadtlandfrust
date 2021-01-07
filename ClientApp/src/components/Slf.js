@@ -12,7 +12,7 @@ export class Slf extends Component {
   }
 
     startGame(){
-        console.log("starting game...")
+        console.log("Starting game...")
         this.setState({gameStarting : false})
     }
 

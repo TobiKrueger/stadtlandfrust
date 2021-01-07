@@ -15,7 +15,8 @@ export class GameCreationScreen extends Component {
         this.state = {name:"", namelabel : "Name", newCategory : "",joined:false,
         CategoryValueMap : [new slfCategoryValueModel("x"),
             new slfCategoryValueModel("y")],
-          Players : []
+          Players : [],
+          host: true,
         }
 
         this.enterGame = this.enterGame.bind(this)
@@ -25,6 +26,7 @@ export class GameCreationScreen extends Component {
         this.deleteCategory = this.deleteCategory.bind(this)
         this.addCategory = this.addCategory.bind(this)
         this.handleKeyDownNewCategory = this.handleKeyDownNewCategory.bind(this)
+        this.startGame = this.startButton.bind(this)
 
       }
 
@@ -127,6 +129,12 @@ export class GameCreationScreen extends Component {
 
   checkIfHost(){
 
+  }
+
+  startButton(){
+    if(this.state.host){
+      return(<Button onClick={e=> this.props.startGame()}>Start the Game!</Button>)
+    }
   }
 
   rigthPanel(){
@@ -235,7 +243,7 @@ export class GameCreationScreen extends Component {
              Einstellungen:
 
              <Grid item>
-               Beispiel einstellung
+               {this.startButton()}
              </Grid>
 
             </Grid>
