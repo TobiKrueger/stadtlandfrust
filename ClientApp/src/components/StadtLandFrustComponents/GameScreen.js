@@ -32,10 +32,13 @@ export class GameScreen extends Component {
         ],
       },
 
-    connection : new HubConnectionBuilder().withUrl("/slfhub").build()
-    };
+    }
 
-    this.state.connection.start()
+    // connection : new HubConnectionBuilder().withUrl("/slfhub").build()
+    // };
+
+    // this.state.connection.start()
+    this.handleChange = this.handleChange.bind(this)
   }
 
   sendChangedState(connection, state){
@@ -58,13 +61,19 @@ export class GameScreen extends Component {
 
   // handles the changes local
   handleChange(textInput, category) {
+
+    var x
+    //console.log(textInput,category)
     this.setState((state) => {
       state.gameState.CategoryValueMap.find(element => element.Category === category).Value = textInput;
-      return state;
+      x = state.gameState.CategoryValueMap
+      console.log(x)
+      console.log(JSON.stringify(x));
+      this.sendChangedCategorie(this.props.connection, JSON.stringify(x));
+
+      return state
     });
-    //console.log(this.state.CategoryValueMap)
-    console.log(JSON.stringify(this.state.gameState.CategoryValueMap))
-    this.sendChangedCategorie(this.state.connection, JSON.stringify(this.state.gameState.CategoryValueMap));
+
   }
 
 

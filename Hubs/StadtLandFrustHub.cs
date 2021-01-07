@@ -43,6 +43,12 @@ namespace stadtlandfrust.Hubs
             await Clients.All.SendAsync("onChangeCategories", gameModel);
         }
 
+        public async Task GetGameState()
+        {
+            SlfGameModel gameState = _gameService.GetGameState();
+            await Clients.Caller.SendAsync("changeGameState",gameState);
+        }
+
         //when the categories are changed
         public async Task ChangeCategories(string categories)
         {
@@ -52,6 +58,14 @@ namespace stadtlandfrust.Hubs
             await Clients.All.SendAsync("onChangeCategories", newCategories);
         }
 
+
+        public async Task JoinGame(String user)
+        {
+            Console.WriteLine(user);
+            SlfUsersModel newUser = JsonSerializer.Deserialize<SlfUsersModel>(user);
+            _gameService.AddUser(newUser);
+            await Clients.Others.SendAsync("newUserJoined",user);
+        }
 
         // JsonSerializer.Serialize<SlfGameModel>(_gameService.GetGameState())
 

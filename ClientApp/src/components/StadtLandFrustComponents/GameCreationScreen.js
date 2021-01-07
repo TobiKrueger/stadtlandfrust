@@ -12,7 +12,7 @@ export class GameCreationScreen extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {name:"", namelabel : "Name", newCategory : "",joined:false,
+        this.state = {name:"", newCategory : "",joined:false,
         CategoryValueMap : [new slfCategoryValueModel("x"),
             new slfCategoryValueModel("y")],
           Players : [],
@@ -97,7 +97,7 @@ export class GameCreationScreen extends Component {
 
   }
 
-  // ADDS A NEW PLAYER, Add send here!
+  // ADDS A NEW PLAYER, Add send here + fix Id!
   addPlayer(Name){
 
     if(Name === ""){
@@ -168,7 +168,7 @@ export class GameCreationScreen extends Component {
         <TextField 
         InputProps={{ startAdornment: (
             <InputAdornment position='start'>
-              {this.state.namelabel}: 
+              Name: 
             </InputAdornment>),}}
         value={this.state.name} onChange={this.nameChanged}
         />

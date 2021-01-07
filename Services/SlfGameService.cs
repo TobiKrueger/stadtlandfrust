@@ -14,6 +14,28 @@ namespace stadtlandfrust.Services
 
         }
 
+        public void startNextRound()
+        {
+
+        }
+        
+        public void startNewGame()
+        {
+
+        }
+
+        public void stoppRound()
+        {
+
+        }
+        
+        public void AddUser(SlfUsersModel newUser)
+        {
+            List<SlfUsersModel> players = this.gameModel.Players;
+            players.Add(newUser);
+            this.gameModel.Players = players;
+        }
+
         public void changeGameState(SlfGameModel newGameModel) 
         {
             this.gameModel = newGameModel;
