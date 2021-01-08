@@ -14,12 +14,12 @@ namespace stadtlandfrust.Services
             //gameModel.CategoryValueMap.Add(new SlfCategoryValueModel("Stadt", ""));
         }
 
-        public void startNextRound()
-        {
-
-        }
-        
         public void startNewGame()
+        {
+            Console.Write("New Game has been started");
+            
+        }
+        public void startNextRound()
         {
 
         }
@@ -33,6 +33,13 @@ namespace stadtlandfrust.Services
         {
             List<SlfUsersModel> players = this.gameModel.Players;
             players.Add(newUser);
+            this.gameModel.Players = players;
+        }
+
+        public void RemoveUser(SlfUsersModel newUser)
+        {
+            List<SlfUsersModel> players = this.gameModel.Players;
+            players.Remove(newUser);
             this.gameModel.Players = players;
         }
 
