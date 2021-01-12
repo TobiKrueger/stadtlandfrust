@@ -11,6 +11,7 @@ namespace stadtlandfrust.Services
 
         public SlfGameService()
         {
+            SlfCategoryValueModel model = new SlfCategoryValueModel(){Category = "Stadt", Value = "A"};
             //gameModel.CategoryValueMap.Add(new SlfCategoryValueModel("Stadt", ""));
         }
 
