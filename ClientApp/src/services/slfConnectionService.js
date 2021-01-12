@@ -8,9 +8,9 @@ export class slfConnectionService{
         this.connection.start()
     }
 
-    getConnection(){
-        return this.connection
-    }
+    // getConnection(){
+    //     return this.connection
+    // }
 
     //#region game creation
 

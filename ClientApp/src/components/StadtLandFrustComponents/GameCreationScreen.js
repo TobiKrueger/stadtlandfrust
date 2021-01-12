@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { Component, useContext, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -31,6 +31,11 @@ export class GameCreationScreen extends Component {
         this.handleKeyDownNewCategory = this.handleKeyDownNewCategory.bind(this)
         this.startGame = this.startButton.bind(this)
         this.sendNewCategory = this.sendNewCategory.bind(this)
+      }
+
+      //On connect set State
+      setState(newState){
+        this.setState(state => {return newState}) 
       }
 
       sendNewCategory(newCategory){       
