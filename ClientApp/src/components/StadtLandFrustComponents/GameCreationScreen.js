@@ -34,16 +34,12 @@ export class GameCreationScreen extends Component {
       }
 
       //On connect set State
-      setState(newState){
+      onConnect(newState){
         this.setState(state => {return newState}) 
       }
 
       sendNewCategory(newCategory){       
       this.context.slfConServ.sendNewCategory(newCategory)
-      }
-
-      onConnect(){
-
       }
 
     // Tracks name box
