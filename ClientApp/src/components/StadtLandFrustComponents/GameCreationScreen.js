@@ -1,10 +1,12 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { Grid } from "@material-ui/core";
 import { slfCategoryValueModel } from "./models/slfCategoryValueModel";
 import { slfUsersModel} from "./models/slfUsersModel";
+import { SlfContext } from "../../context/slfContext";
+
 
 
 export class GameCreationScreen extends Component {
@@ -18,6 +20,7 @@ export class GameCreationScreen extends Component {
           Players : [],
           host: true,
         }
+        
 
         this.enterGame = this.enterGame.bind(this)
         this.rigthPanel = this.rigthPanel.bind(this)
@@ -209,6 +212,8 @@ export class GameCreationScreen extends Component {
   }
 
     render() {
+      
+        this.context.slfConServ.test()
         return (
           <div>
             <Grid container spacing={3} justify='center'>
@@ -265,3 +270,5 @@ export class GameCreationScreen extends Component {
         );
     }
 }
+
+GameCreationScreen.contextType = SlfContext

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { GameScreen } from './StadtLandFrustComponents/GameScreen';
 import { GameCreationScreen } from './StadtLandFrustComponents/GameCreationScreen';
 import { HubConnectionBuilder } from "@microsoft/signalr";
+import { SlfContext } from '../context/slfContext';
 
 
 export class Slf extends Component {
@@ -31,7 +32,8 @@ export class Slf extends Component {
                     <GameCreationScreen startGame ={this.startGame} connection={this.state.connection}>
   
                     </GameCreationScreen >
-                </div>)
+                </div>
+                )
         
     } else{
         return (
@@ -40,6 +42,8 @@ export class Slf extends Component {
                     </GameScreen>
                 </div> 
         );
-    }    
+    }
+     
   }
+ 
 }
