@@ -54,7 +54,7 @@ export class GameCreationScreen extends Component {
     //tracks category box 
     newCategoryChanged(event){
       this.setState({ newCategory: event.target.value });
-  }    
+    }    
 
     // DELETES a Category, Implement send here!
     deleteCategory(categoryValue){
@@ -72,9 +72,9 @@ export class GameCreationScreen extends Component {
 
     //ADDS a new Category, Implement SEND HERE!
     addCategory(newCategory){
-      var x = this.state.CategoryValueMap.filter(category=> category.Category === newCategory)
+      var x = this.state.CategoryValueMap.find(category=> category.Category === newCategory)
     
-      if (x.length === 0){
+      if (x){
         this.setState((state) =>{
           state.CategoryValueMap.push(new slfCategoryValueModel(newCategory));
           state.newCategory = "";
@@ -137,7 +137,7 @@ export class GameCreationScreen extends Component {
       
 
       //TODO
-      // if Host : send to server starting
+      // send to server
     }
   }
 
@@ -212,7 +212,9 @@ export class GameCreationScreen extends Component {
   }
 
     render() {
-      
+
+        this.context.slfConServ.test()
+        this.context.slfConServ.changetest()
         this.context.slfConServ.test()
         return (
           <div>

@@ -5,6 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import { SideScoreBoard } from "./SideScoreBoard";
 import { slfCategoryValueModel } from "./models/slfCategoryValueModel";
 import { slfUsersModel} from "./models/slfUsersModel";
+import { SlfContext } from "../../context/slfContext";
+
 
 
 
@@ -78,6 +80,7 @@ export class GameScreen extends Component {
 
 
   render() {
+
     return (
       <div>
         <Grid container spacing={3} justify='center'>
@@ -112,3 +115,6 @@ export class GameScreen extends Component {
     );
   }
 }
+
+GameScreen.contextType = SlfContext
+

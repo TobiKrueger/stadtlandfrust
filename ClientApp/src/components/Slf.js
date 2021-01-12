@@ -22,6 +22,7 @@ export class Slf extends Component {
         console.log("Starting game...")
         // Send to the server game startet
         this.setState({gameStarting : false})
+        //TODO SEND TO SERVER
     }
 
   render() {
