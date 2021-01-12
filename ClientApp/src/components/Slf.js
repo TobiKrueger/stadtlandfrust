@@ -10,12 +10,10 @@ export class Slf extends Component {
 
   constructor(props) {
     super(props);
-    this.state= {gameStarting : true, connection : new HubConnectionBuilder().withUrl("/slfhub").build()
-  };
+    this.state= {gameStarting : true};
     this.startGame = this.startGame.bind(this)
 
 
-  this.state.connection.start()
   }
 
     startGame(){
@@ -30,7 +28,7 @@ export class Slf extends Component {
 
         return (
                 <div>
-                    <GameCreationScreen startGame ={this.startGame} connection={this.state.connection}>
+                    <GameCreationScreen startGame ={this.startGame}>
   
                     </GameCreationScreen >
                 </div>
@@ -39,7 +37,7 @@ export class Slf extends Component {
     } else{
         return (
                 <div>
-                    <GameScreen connection={this.state.connection}>
+                    <GameScreen>
                     </GameScreen>
                 </div> 
         );

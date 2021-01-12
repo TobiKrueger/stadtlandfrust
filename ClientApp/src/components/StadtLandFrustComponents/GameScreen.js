@@ -50,12 +50,6 @@ export class GameScreen extends Component {
             return console.error(err.toString())});
   }
 
-  sendChangedCategorieAnswer(connection, categories){
-    connection.invoke("ChangeCategorieAnswer", categories)
-            .catch(function (err) {
-            console.log("Mistakes were made")
-            return console.error(err.toString())});
-  }
 
   stateToJson(){
 
@@ -71,7 +65,8 @@ export class GameScreen extends Component {
       x = state.gameState.CategoryValueMap
       console.log(x)
       console.log(JSON.stringify(x));
-      this.sendChangedCategorieAnswer(this.props.connection, JSON.stringify(x));
+      this.context.slfConServ.sendChangedCategorieAnswer(JSON.stringify(x))
+      //this.sendChangedCategorieAnswer(this.props.connection, JSON.stringify(x));
 
       return state
     });

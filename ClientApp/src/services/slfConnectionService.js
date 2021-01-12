@@ -4,28 +4,39 @@ import { HubConnectionBuilder } from "@microsoft/signalr";
 export class slfConnectionService{
 
     constructor() {
-        this.testvar = "hello there"
         this.connection = new HubConnectionBuilder().withUrl("/slfhub").build()
         this.connection.start()
-
     }
 
-    test() {
-
-        console.log(this.testvar)
-        
-    }
-
-    changetest(){
-        this.testvar = "General Kenobi"
+    getConnection(){
+        return this.connection
     }
 
     //#region game creation
+
+    sendNewCategory(newCategory){       
+        console.log(newCategory)
+        this.connection.invoke("AddCategory", newCategory)
+              .catch(function (err) {
+              console.log("Mistakes were made")
+              return console.error(err.toString())});
+                }
+
+    sendDeleteCategory(categoryValue){
+
+      }
 
 
     //#endregion
     
     //#region game running
+
+    sendChangedCategorieAnswer(categories){
+        this.connection.invoke("ChangeCategorieAnswer", categories)
+                .catch(function (err) {
+                console.log("Mistakes were made")
+                return console.error(err.toString())});
+      }
 
 
     //#endregion
@@ -33,6 +44,6 @@ export class slfConnectionService{
     //#region game over
 
 
-    
+
     //#endregion
 }

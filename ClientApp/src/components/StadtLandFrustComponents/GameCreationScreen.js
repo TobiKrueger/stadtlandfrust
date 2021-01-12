@@ -34,12 +34,7 @@ export class GameCreationScreen extends Component {
       }
 
       sendNewCategory(newCategory){       
-      console.log(newCategory)
-      this.props.connection.invoke("AddCategory", newCategory)
-            .catch(function (err) {
-            console.log("Mistakes were made")
-            return console.error(err.toString())});
-
+      this.context.slfConServ.sendNewCategory(newCategory)
       }
 
       onConnect(){
@@ -74,7 +69,7 @@ export class GameCreationScreen extends Component {
     addCategory(newCategory){
       var x = this.state.CategoryValueMap.find(category=> category.Category === newCategory)
     
-      if (x){
+      if (!x){
         this.setState((state) =>{
           state.CategoryValueMap.push(new slfCategoryValueModel(newCategory));
           state.newCategory = "";
@@ -212,10 +207,6 @@ export class GameCreationScreen extends Component {
   }
 
     render() {
-
-        this.context.slfConServ.test()
-        this.context.slfConServ.changetest()
-        this.context.slfConServ.test()
         return (
           <div>
             <Grid container spacing={3} justify='center'>
